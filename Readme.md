@@ -10,7 +10,7 @@ A Java console application for managing student records and academic information
 
 
 ### 🚀 Planned
-- [ ] Add Student
+- [x] Add Student
 - [ ] View Students
 - [ ] Search Student
 - [ ] Update Student
