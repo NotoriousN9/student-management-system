@@ -1,6 +1,4 @@
 public class Student {
-    StudentManager studentManager = new StudentManager();
-
     private final int studentId;
     private final String studentName;
     private final int studentAge;
@@ -11,5 +9,21 @@ public class Student {
         this.studentAge = studentAge;
         this.studentName = studentName;
         this.std = std;
+    }
+
+    public int getStudentId() {
+        return studentId;
+    }
+
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public int getStudentAge() {
+        return studentAge;
+    }
+
+    public int getStd() {
+        return std;
     }
 }

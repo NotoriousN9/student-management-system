@@ -7,4 +7,8 @@ public class StudentManager {
     public void addStudent(Student student) {
         students.add(student);
     }
+
+    public List<Student> getStudents() {
+        return students;
+    }
 }
