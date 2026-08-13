@@ -6,6 +6,12 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int choice = 0;
 
+        int iD;
+        String name;
+        int age;
+        int std;
+
+
         StudentManager studentManager = new StudentManager();
 
         System.out.println("""
@@ -26,11 +32,6 @@ public class Main {
             if(choice > 0 && choice <= 6) {
                 switch(choice) {
                     case 1:
-                        int iD;
-                        String name;
-                        int age;
-                        int std;
-
                         System.out.print("Enter the Student ID(4 DIGIT): ");
                         iD = scanner.nextInt();
                         scanner.nextLine();
@@ -49,6 +50,29 @@ public class Main {
 
                         System.out.print("\n");
                         break;
+
+                    case 4:
+                        System.out.println("Enter the iD of the student(4 Digit): ");
+                        iD = scanner.nextInt();
+
+                        Student foundStudent = studentManager.searchStudents(iD);
+
+
+                        if (foundStudent != null) {
+                                System.out.println("Student Details: ");
+                                System.out.println("Student ID: " + foundStudent.getStudentId());
+                                System.out.println("Student Name: " + foundStudent.getStudentName());
+                                System.out.println("Student Age: " + foundStudent.getStudentAge());
+                                System.out.println("Student Class: " + foundStudent.getStd());
+                                System.out.print("\n");
+                        }
+
+                        else {
+                            System.out.println("Student not Found!");
+                        }
+
+                        break;
+
 
                     case 5:
                         List<Student> students = studentManager.getStudents();
