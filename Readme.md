@@ -14,7 +14,7 @@ A Java console application for managing student records and academic information
 - [x] View Students
 - [x] Search Student
 - [ ] Update Student
-- [ ] Delete Student
+- [x] Delete Student
 - [ ] User-defined Subjects
 - [ ] Add/Edit Marks
 - [ ] Calculate Average Marks

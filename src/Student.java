@@ -26,4 +26,5 @@ public class Student {
     public int getStd() {
         return std;
     }
+
 }

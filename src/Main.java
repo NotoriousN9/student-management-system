@@ -11,7 +11,6 @@ public class Main {
         int age;
         int std;
 
-
         StudentManager studentManager = new StudentManager();
 
         System.out.println("""
@@ -19,9 +18,9 @@ public class Main {
                          Student Management System
                 ============================================
                     1. Add NEW Student.
-                    2. Remove EXISTING Student.
+                    2. Search an EXISTING Student.
                     3. Change Student ATTRIBUTES.
-                    4. Search an EXISTING Student.
+                    4. Remove EXISTING Student.
                     5. View EXISTING Students in Structure.
                     6. Exit
                 """);
@@ -51,9 +50,36 @@ public class Main {
                         System.out.print("\n");
                         break;
 
-                    case 4:
-                        System.out.println("Enter the iD of the student(4 Digit): ");
+
+                    case 2:
+                        System.out.print("Enter the Student ID(4 DIGIT): ");
                         iD = scanner.nextInt();
+                        scanner.nextLine();
+
+                        Student searchStudent = studentManager.searchStudents(iD);
+
+                        if (searchStudent != null) {
+                            System.out.println("Student Details: ");
+                            System.out.println("Student ID: " + searchStudent.getStudentId());
+                            System.out.println("Student Name: " + searchStudent.getStudentName());
+                            System.out.println("Student Age: " + searchStudent.getStudentAge());
+                            System.out.println("Student Class: " + searchStudent.getStd());
+                            System.out.print("\n");
+
+
+                        }
+
+                        else {
+                            System.out.println("Student not Found!");
+                        }
+
+                        break;
+
+
+                    case 4:
+                        System.out.print("Enter the iD of the student(4 Digit): ");
+                        iD = scanner.nextInt();
+                        scanner.nextLine();
 
                         Student foundStudent = studentManager.searchStudents(iD);
 
@@ -65,10 +91,38 @@ public class Main {
                                 System.out.println("Student Age: " + foundStudent.getStudentAge());
                                 System.out.println("Student Class: " + foundStudent.getStd());
                                 System.out.print("\n");
+
+                            String delete;
+
+                            while (true) {
+                                System.out.print("Delete the Student? (press Y or N) : ");
+                                delete = scanner.nextLine();
+
+                                if(delete.equals("Y") || delete.equals("y")) {
+                                    studentManager.removeStudent(foundStudent.getStudentId());
+                                    System.out.println();
+                                    System.out.println("Student removed successfully!");
+                                    System.out.println();
+                                    break;
+
+                                } else if (delete.equals("N") || delete.equals("n")) {
+                                    System.out.println();
+                                    System.out.println("Operation Terminated");
+                                    System.out.println();
+                                    break;
+
+                                } else {
+                                    System.out.println();
+                                    System.out.println("Try again.");
+                                    System.out.println();
+                                }
+                            }
                         }
 
                         else {
+                            System.out.println();
                             System.out.println("Student not Found!");
+                            System.out.println();
                         }
 
                         break;
@@ -90,7 +144,9 @@ public class Main {
                 }
             }
             else {
+                System.out.println();
                 System.out.println("Enter valid Choice.");
+                System.out.println();
             }
         }
 
