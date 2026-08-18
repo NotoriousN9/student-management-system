@@ -37,4 +37,19 @@ public class StudentManager {
 
         return false;
     }
+
+    public boolean updateStudent(int studentId, String name, int age, int std) {
+        Student student = searchStudents(studentId);
+
+        if (student == null) {
+            return false;
+        }
+
+        student.setStudentName(name);
+        student.setStudentAge(age);
+        student.setStd(std);
+
+        return true;
+
+    }
 }

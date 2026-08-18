@@ -13,7 +13,7 @@ A Java console application for managing student records and academic information
 - [x] Add Student
 - [x] View Students
 - [x] Search Student
-- [ ] Update Student
+- [x] Update Student
 - [x] Delete Student
 - [ ] User-defined Subjects
 - [ ] Add/Edit Marks
