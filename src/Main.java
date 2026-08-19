@@ -49,11 +49,34 @@ public class Main {
                         System.out.print("Enter the name of the Student: ");
                         name = scanner.nextLine();
 
-                        System.out.print("Enter the Student's age: ");
-                        age = scanner.nextInt();
+                        while(true) {
+                            System.out.print("Enter the Student's age: ");
+                            age = scanner.nextInt();
+                            scanner.nextLine();
 
-                        System.out.print("Enter the class of the Student: ");
-                        std = scanner.nextInt();
+                            if (age < 1 || age > 19) {
+                                System.out.println("Enter a valid age.");
+                            }
+
+                            else {
+                                break;
+                            }
+                        }
+
+                        while(true) {
+                            System.out.print("Enter the class of the Student: ");
+                            std = scanner.nextInt();
+                            scanner.nextLine();
+
+                            if(std < 1 || std > 12) {
+                                System.out.println("Enter a valid Class of the Student.");
+                            }
+
+                            else{
+                                break;
+                            }
+                        }
+
 
                         Student student = new Student(iD, name, age, std);
                         studentManager.addStudent(student);
@@ -143,19 +166,38 @@ public class Main {
                                         break;
 
                                     case 2:
-                                        System.out.println();
-                                        System.out.print("Enter the new Age: ");
-                                        int newAge = scanner.nextInt();
-                                        scanner.nextLine();
-                                        findStudent.setStudentAge(newAge);
+                                        while(true) {
+                                            System.out.print("Enter the Student's age: ");
+                                            int newAge = scanner.nextInt();
+                                            scanner.nextLine();
+
+                                            if (newAge < 1 || newAge > 19) {
+                                                System.out.println("Enter a valid age.");
+                                            }
+
+                                            else {
+                                                findStudent.setStudentAge(newAge);
+                                                break;
+                                            }
+                                        }
+
                                         break;
 
                                     case 3:
-                                        System.out.println();
-                                        System.out.print("Enter the new Class: ");
-                                        int newStd = scanner.nextInt();
-                                        scanner.nextLine();
-                                        findStudent.setStd(newStd);
+                                        while(true) {
+                                            System.out.print("Enter the class of the Student: ");
+                                            int newStd = scanner.nextInt();
+                                            scanner.nextLine();
+
+                                            if(newStd < 1 || newStd > 12) {
+                                                System.out.println("Enter a valid Class of the Student.");
+                                            }
+
+                                            else{
+                                                findStudent.setStd(newStd);
+                                                break;
+                                            }
+                                        };
                                         break;
 
                                     case 4:
