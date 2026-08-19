@@ -6,7 +6,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int choice = 0;
 
-        int iD = 0;
+        int iD;
         String name;
         int age;
         int std;
@@ -26,57 +26,27 @@ public class Main {
                 """);
 
         while(choice != 6) {
-            System.out.println();
             System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
             if(choice > 0 && choice <= 6) {
                 switch(choice) {
                     case 1:
-                        while(true) {
-                            System.out.print("Enter the Student ID(4 DIGIT): ");
-                            iD = scanner.nextInt();
-                            scanner.nextLine();
+                        while (true) {
+                            iD = InputValidator.getValidStudentId(scanner);
 
-                            if(iD < 1000 || iD > 9999) {
-                                System.out.println("Enter a valid ID.\n");
-                            }
-
-                            else {
+                            if (studentManager.searchStudents(iD) == null) {
                                 break;
                             }
+                            System.out.println("Student ID already exists. Enter a different Valid ID.\n");
                         }
 
+                        System.out.println();
                         System.out.print("Enter the name of the Student: ");
                         name = scanner.nextLine();
 
-                        while(true) {
-                            System.out.print("Enter the Student's age: ");
-                            age = scanner.nextInt();
-                            scanner.nextLine();
+                        age = InputValidator.getValidStudentAge(scanner);
 
-                            if (age < 1 || age > 19) {
-                                System.out.println("Enter a valid age.");
-                            }
-
-                            else {
-                                break;
-                            }
-                        }
-
-                        while(true) {
-                            System.out.print("Enter the class of the Student: ");
-                            std = scanner.nextInt();
-                            scanner.nextLine();
-
-                            if(std < 1 || std > 12) {
-                                System.out.println("Enter a valid Class of the Student.");
-                            }
-
-                            else{
-                                break;
-                            }
-                        }
-
+                        std = InputValidator.getValidStudentClass(scanner);
 
                         Student student = new Student(iD, name, age, std);
                         studentManager.addStudent(student);
@@ -86,64 +56,27 @@ public class Main {
 
 
                     case 2:
-                        while(true) {
-                            System.out.print("Enter the Student ID(4 DIGIT): ");
-                            iD = scanner.nextInt();
-                            scanner.nextLine();
-
-                            if(iD < 1000 || iD > 9999) {
-                                System.out.println("Enter a valid ID.\n");
-                            }
-
-                            else {
-                                break;
-                            }
-                        }
+                        iD = InputValidator.getValidStudentId(scanner);
 
                         Student searchStudent = studentManager.searchStudents(iD);
 
                         if (searchStudent != null) {
-                            System.out.println("Student Details: ");
-                            System.out.println("Student ID: " + searchStudent.getStudentId());
-                            System.out.println("Student Name: " + searchStudent.getStudentName());
-                            System.out.println("Student Age: " + searchStudent.getStudentAge());
-                            System.out.println("Student Class: " + searchStudent.getStd());
-                            System.out.print("\n");
-
-
+                            StudentView.displayStudent(searchStudent);
                         }
 
                         else {
-                            System.out.println();
-                            System.out.println("Student not Found!");
+                            System.out.println("\nStudent not Found!\n");
                         }
 
                         break;
 
                     case 3:
-                        while(true) {
-                            System.out.print("Enter the Student ID(4 DIGIT): ");
-                            iD = scanner.nextInt();
-                            scanner.nextLine();
-
-                            if(iD < 1000 || iD > 9999) {
-                                System.out.println("Enter a valid ID.\n");
-                            }
-
-                            else {
-                                break;
-                            }
-                        }
+                        iD = InputValidator.getValidStudentId(scanner);
 
                         Student findStudent = studentManager.searchStudents(iD);
 
                         if(findStudent != null) {
-                            System.out.println("Student Details: ");
-                            System.out.println("Student ID: " + findStudent.getStudentId());
-                            System.out.println("Student Name: " + findStudent.getStudentName());
-                            System.out.println("Student Age: " + findStudent.getStudentAge());
-                            System.out.println("Student Class: " + findStudent.getStd());
-                            System.out.print("\n");
+                            StudentView.displayStudent(findStudent);
 
                             int change = 0;
 
@@ -163,41 +96,22 @@ public class Main {
                                         System.out.print("Enter the new Name: ");
                                         String newName = scanner.nextLine();
                                         findStudent.setStudentName(newName);
+                                        System.out.println("New Name set successfully.\n");
+
                                         break;
 
                                     case 2:
-                                        while(true) {
-                                            System.out.print("Enter the Student's age: ");
-                                            int newAge = scanner.nextInt();
-                                            scanner.nextLine();
-
-                                            if (newAge < 1 || newAge > 19) {
-                                                System.out.println("Enter a valid age.");
-                                            }
-
-                                            else {
-                                                findStudent.setStudentAge(newAge);
-                                                break;
-                                            }
-                                        }
+                                        int newAge = InputValidator.getValidStudentAge(scanner);
+                                        findStudent.setStudentAge(newAge);
+                                        System.out.println("New Age set successfully.\n");
 
                                         break;
 
                                     case 3:
-                                        while(true) {
-                                            System.out.print("Enter the class of the Student: ");
-                                            int newStd = scanner.nextInt();
-                                            scanner.nextLine();
+                                        int newStd = InputValidator.getValidStudentClass(scanner);
+                                        findStudent.setStd(newStd);
+                                        System.out.println("New Class set successfully.\n");
 
-                                            if(newStd < 1 || newStd > 12) {
-                                                System.out.println("Enter a valid Class of the Student.");
-                                            }
-
-                                            else{
-                                                findStudent.setStd(newStd);
-                                                break;
-                                            }
-                                        };
                                         break;
 
                                     case 4:
@@ -215,29 +129,12 @@ public class Main {
 
 
                     case 4:
-                        while(true) {
-                            System.out.print("Enter the Student ID(4 DIGIT): ");
-                            iD = scanner.nextInt();
-                            scanner.nextLine();
-
-                            if(iD < 1000 || iD > 9999) {
-                                System.out.println("Enter a valid ID.\n");
-                            }
-
-                            else {
-                                break;
-                            }
-                        }
+                        iD = InputValidator.getValidStudentId(scanner);
 
                         Student foundStudent = studentManager.searchStudents(iD);
 
                         if (foundStudent != null) {
-                                System.out.println("Student Details: ");
-                                System.out.println("Student ID: " + foundStudent.getStudentId());
-                                System.out.println("Student Name: " + foundStudent.getStudentName());
-                                System.out.println("Student Age: " + foundStudent.getStudentAge());
-                                System.out.println("Student Class: " + foundStudent.getStd());
-                                System.out.print("\n");
+                            StudentView.displayStudent(foundStudent);
 
                             String delete;
 
@@ -279,12 +176,7 @@ public class Main {
                         List<Student> students = studentManager.getStudents();
 
                         for (Student studentView : students) {
-                            System.out.println("Student Details: ");
-                            System.out.println("Student ID: " + studentView.getStudentId());
-                            System.out.println("Student Name: " + studentView.getStudentName());
-                            System.out.println("Student Age: " + studentView.getStudentAge());
-                            System.out.println("Student Class: " + studentView.getStd());
-                            System.out.print("\n");
+                            StudentView.displayStudent(studentView);
                         }
 
                         break;
