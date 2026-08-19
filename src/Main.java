@@ -6,7 +6,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int choice = 0;
 
-        int iD;
+        int iD = 0;
         String name;
         int age;
         int std;
@@ -28,14 +28,23 @@ public class Main {
         while(choice != 6) {
             System.out.println();
             System.out.print("Enter your choice: ");
-            System.out.println();
             choice = scanner.nextInt();
             if(choice > 0 && choice <= 6) {
                 switch(choice) {
                     case 1:
-                        System.out.print("Enter the Student ID(4 DIGIT): ");
-                        iD = scanner.nextInt();
-                        scanner.nextLine();
+                        while(true) {
+                            System.out.print("Enter the Student ID(4 DIGIT): ");
+                            iD = scanner.nextInt();
+                            scanner.nextLine();
+
+                            if(iD < 1000 || iD > 9999) {
+                                System.out.println("Enter a valid ID.\n");
+                            }
+
+                            else {
+                                break;
+                            }
+                        }
 
                         System.out.print("Enter the name of the Student: ");
                         name = scanner.nextLine();
@@ -54,10 +63,19 @@ public class Main {
 
 
                     case 2:
-                        System.out.print("Enter the Student ID(4 DIGIT): ");
-                        System.out.println();
-                        iD = scanner.nextInt();
-                        scanner.nextLine();
+                        while(true) {
+                            System.out.print("Enter the Student ID(4 DIGIT): ");
+                            iD = scanner.nextInt();
+                            scanner.nextLine();
+
+                            if(iD < 1000 || iD > 9999) {
+                                System.out.println("Enter a valid ID.\n");
+                            }
+
+                            else {
+                                break;
+                            }
+                        }
 
                         Student searchStudent = studentManager.searchStudents(iD);
 
@@ -80,10 +98,19 @@ public class Main {
                         break;
 
                     case 3:
-                        System.out.print("Enter the ID of the student(4 Digits): ");
-                        System.out.println();
-                        iD = scanner.nextInt();
-                        scanner.nextLine();
+                        while(true) {
+                            System.out.print("Enter the Student ID(4 DIGIT): ");
+                            iD = scanner.nextInt();
+                            scanner.nextLine();
+
+                            if(iD < 1000 || iD > 9999) {
+                                System.out.println("Enter a valid ID.\n");
+                            }
+
+                            else {
+                                break;
+                            }
+                        }
 
                         Student findStudent = studentManager.searchStudents(iD);
 
@@ -146,9 +173,19 @@ public class Main {
 
 
                     case 4:
-                        System.out.print("Enter the ID of the student(4 Digit): ");
-                        iD = scanner.nextInt();
-                        scanner.nextLine();
+                        while(true) {
+                            System.out.print("Enter the Student ID(4 DIGIT): ");
+                            iD = scanner.nextInt();
+                            scanner.nextLine();
+
+                            if(iD < 1000 || iD > 9999) {
+                                System.out.println("Enter a valid ID.\n");
+                            }
+
+                            else {
+                                break;
+                            }
+                        }
 
                         Student foundStudent = studentManager.searchStudents(iD);
 
@@ -214,7 +251,6 @@ public class Main {
             else {
                 System.out.println();
                 System.out.println("Enter valid Choice.");
-                System.out.println();
             }
         }
 
