@@ -9,7 +9,7 @@ public class InputValidator {
             int studentId = scanner.nextInt();
             scanner.nextLine();
 
-            if (studentId < 1000 || studentId > 9999) {
+            if (studentId >= 1000 && studentId <= 9999) {
                 return studentId;
             }
 
@@ -24,7 +24,7 @@ public class InputValidator {
             int studentAge = scanner.nextInt();
             scanner.nextLine();
 
-            if (studentAge < 1 || studentAge > 19) {
+            if (studentAge >= 1 && studentAge <= 19) {
                 return studentAge;
             }
 
@@ -39,7 +39,7 @@ public class InputValidator {
             int studentStd = scanner.nextInt();
             scanner.nextLine();
 
-            if(studentStd < 1 || studentStd > 12) {
+            if(studentStd >= 1 && studentStd <= 12) {
                 return studentStd;
             }
 
@@ -49,15 +49,16 @@ public class InputValidator {
 
     public static int getValidChoice (Scanner scanner, int min, int max) {
         while (true) {
-            System.out.println("Enter your choice: ");
+            System.out.print("Enter your choice: ");
 
             if (scanner.hasNextInt()) {
                 int choice = scanner.nextInt();
                 scanner.nextLine();
 
-                if(choice >= min && choice <= max) {
+                if (choice >= min && choice <= max) {
                     return choice;
                 }
+            }
                 else {
                     scanner.nextLine();
                 }
@@ -65,7 +66,6 @@ public class InputValidator {
                 System.out.println("Enter a valid choice.");
             }
         }
-    }
 
     public static boolean getValidYOrN(Scanner scanner) {
         while (true) {
