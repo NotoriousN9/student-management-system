@@ -60,7 +60,7 @@ public class InputValidator {
         }
     }
 
-    public static int getValidChoice (Scanner scanner, int min, int max) {
+    public static int getValidChoice(Scanner scanner, int min, int max) {
         while (true) {
             System.out.print("Enter your choice: ");
 
@@ -71,14 +71,13 @@ public class InputValidator {
                 if (choice >= min && choice <= max) {
                     return choice;
                 }
+            } else {
+                scanner.nextLine();
             }
-                else {
-                    scanner.nextLine();
-                }
 
-                System.out.println("Enter a valid choice.");
-            }
+            System.out.println("Enter a valid choice.");
         }
+    }
 
     public static boolean getValidYOrN(Scanner scanner) {
         while (true) {

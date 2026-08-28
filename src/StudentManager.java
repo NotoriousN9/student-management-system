@@ -1,19 +1,28 @@
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Iterator;
+import java.util.List;
 
 public class StudentManager {
     private final List<Student> students = new ArrayList<>();
 
-    public void addStudent(Student student) {
+    public boolean addStudent(Student student) {
+        if(searchStudent(student.getStudentId()) != null) {
+            return false;
+        }
+
         students.add(student);
+        return true;
+    }
+
+    public boolean studentIdExists(int studentId) {
+        return searchStudent(studentId) != null;
     }
 
     public List<Student> getStudents() {
-        return students;
+        return List.copyOf(students);
     }
 
-    public Student searchStudents(int studentId) {
+    public Student searchStudent(int studentId) {
         for (Student student : students) {
             if (student.getStudentId() == studentId) {
                 return student;
@@ -36,20 +45,5 @@ public class StudentManager {
         }
 
         return false;
-    }
-
-    public boolean updateStudent(int studentId, String name, int age, int std) {
-        Student student = searchStudents(studentId);
-
-        if (student == null) {
-            return false;
-        }
-
-        student.setStudentName(name);
-        student.setStudentAge(age);
-        student.setStd(std);
-
-        return true;
-
     }
 }
