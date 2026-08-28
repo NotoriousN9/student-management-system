@@ -41,8 +41,7 @@ public class Main {
                         }
 
                         System.out.println();
-                        System.out.print("Enter the name of the Student: ");
-                        name = scanner.nextLine();
+                        name = InputValidator.getValidStudentName(scanner);
 
                         while (true) {
                             age = InputValidator.getValidStudentAge(scanner);
@@ -54,8 +53,14 @@ public class Main {
 
                             else {
                                 int stdNew = std + 5;
-                                System.out.printf("\nThe Age and Class combination don't really add up. (Expected Age %d-%d-%d for Class %d)\n", stdNew - 1, stdNew, stdNew + 1, std);
+
+                                System.out.printf(
+                                        "The Age and Class combination don't really add up. " +
+                                                "Expected Age %d-%d-%d for Class %d\n",
+                                        stdNew - 1, stdNew, stdNew + 1, std);
+
                                 System.out.print("Treat this as an exception? (Y / N): ");
+
                                 boolean exceptionAgeClass = InputValidator.getValidYOrN(scanner);
 
                                 if(exceptionAgeClass) {
@@ -71,7 +76,6 @@ public class Main {
                         studentManager.addStudent(student);
                         System.out.println("Student added successfully.");
 
-                        System.out.print("\n");
                         break;
 
 
@@ -101,26 +105,35 @@ public class Main {
                             int change = 0;
 
                             while(change != 4) {
+                                System.out.println();
                                 System.out.println("CHANGE ATTRIBUTES");
                                 System.out.println("1. Change Student Name.");
                                 System.out.println("2. Change Student Age.");
                                 System.out.println("3. Change Student Class.");
                                 System.out.println("4. Exit.");
-                                System.out.print("What to change?: ");
                                 change = InputValidator.getValidChoice(scanner, 1, 4);
 
                                 switch (change) {
                                     case 1:
-                                        System.out.println();
-                                        System.out.print("Enter the new Name: ");
-                                        String newName = scanner.nextLine();
-                                        findStudent.setStudentName(newName);
-                                        System.out.println("New Name set successfully.\n");
+                                        String newName = InputValidator.getValidStudentName(scanner);
+
+                                        if(newName.equals(findStudent.getStudentName())) {
+                                            System.out.println("Student name is already that.");
+                                        }
+                                        else{
+                                            findStudent.setStudentName(newName);
+                                            System.out.println("Student name updated successfully.");
+                                        }
 
                                         break;
 
                                     case 2:
                                         int newAge = InputValidator.getValidStudentAge(scanner);
+
+                                        if(newAge == findStudent.getStudentAge()) {
+                                            System.out.println("Student is already " + newAge + " years old.");
+                                            break;
+                                        }
 
                                         if(StudentRules.isAgeClassValid(newAge, findStudent.getStd())) {
                                             findStudent.setStudentAge(newAge);
@@ -129,7 +142,10 @@ public class Main {
                                         else {
                                             int expectedAge = findStudent.getStd() + 5;
 
-                                            System.out.printf("\nThe Age and Class combination don't really add up. (Expected Age %d-%d-%d for Class %d)\n", expectedAge - 1, expectedAge, expectedAge + 1, findStudent.getStd());
+                                            System.out.printf(
+                                                    "The Age and Class combination don't really add up. " +
+                                                            "Expected Age %d-%d-%d for Class %d\n",
+                                                    expectedAge - 1, expectedAge, expectedAge + 1, findStudent.getStd());
 
                                             System.out.print("Treat this as an exception? (Y / N): ");
 
@@ -137,7 +153,8 @@ public class Main {
 
                                             if(exceptionAgeClass) {
                                                 findStudent.setStudentAge(newAge);
-                                                System.out.println("Age and Class set successfully.");
+                                                System.out.println();
+                                                System.out.println("Student age updated successfully as an exception.");
                                             }
                                             else {
                                                 System.out.println("Age was not changed.");
@@ -148,8 +165,37 @@ public class Main {
 
                                     case 3:
                                         int newStd = InputValidator.getValidStudentClass(scanner);
-                                        findStudent.setStd(newStd);
-                                        System.out.println("New Class set successfully.\n");
+
+                                        if(newStd == findStudent.getStd()) {
+                                            System.out.println("Student already in Class " + newStd + ".");
+                                            break;
+                                        }
+
+                                        if(StudentRules.isAgeClassValid(findStudent.getStudentAge(), newStd)) {
+                                            findStudent.setStd(newStd);
+                                            System.out.println("Student Class updated successfully.");
+                                        }
+                                        else {
+                                            int expectedAge = newStd     + 5;
+
+                                            System.out.printf(
+                                                    "The Age and Class combination don't really add up. " +
+                                                            "Expected Age %d-%d-%d for Class %d\n",
+                                                    expectedAge - 1, expectedAge, expectedAge + 1, newStd);
+
+                                            System.out.print("Treat this as an exception? (Y / N): ");
+
+                                            boolean exceptionAgeClass = InputValidator.getValidYOrN(scanner);
+
+                                            if(exceptionAgeClass) {
+                                                findStudent.setStd(newStd);
+                                                System.out.println();
+                                                System.out.println("Student Class updated successfully as an exception.");
+                                            }
+                                            else {
+                                                System.out.println("Class was not changed.");
+                                            }
+                                        }
 
                                         break;
 
@@ -175,30 +221,23 @@ public class Main {
                         if (foundStudent != null) {
                             StudentView.displayStudent(foundStudent);
 
-                            String delete;
-
                             while (true) {
                                 System.out.print("Delete the Student? (press Y or N) : ");
-                                delete = scanner.nextLine();
+                                boolean delete = InputValidator.getValidYOrN(scanner);
 
-                                if(delete.equals("Y") || delete.equals("y")) {
+                                if(delete) {
                                     studentManager.removeStudent(foundStudent.getStudentId());
                                     System.out.println();
                                     System.out.println("Student removed successfully!");
-                                    System.out.println();
-                                    break;
-
-                                } else if (delete.equals("N") || delete.equals("n")) {
-                                    System.out.println();
-                                    System.out.println("Operation Terminated");
-                                    System.out.println();
-                                    break;
 
                                 } else {
                                     System.out.println();
-                                    System.out.println("Try again.");
-                                    System.out.println();
+                                    System.out.println("Operation Terminated");
+
                                 }
+
+                                System.out.println();
+                                break;
                             }
                         }
 

@@ -2,6 +2,19 @@ import java.util.Scanner;
 
 public class InputValidator {
 
+    public static String getValidStudentName (Scanner scanner) {
+        while (true) {
+            System.out.print("Enter the name of the Student: ");
+            String studentName = scanner.nextLine().trim();
+
+            if(!studentName.isEmpty() && studentName.matches("[a-zA-Z ]+")) {
+                return studentName;
+            }
+
+            System.out.println("Enter a valid student name.\n");
+        }
+    }
+
     public static int getValidStudentId(Scanner scanner) {
         while (true) {
             System.out.println();
@@ -24,7 +37,7 @@ public class InputValidator {
             int studentAge = scanner.nextInt();
             scanner.nextLine();
 
-            if (studentAge >= 1 && studentAge <= 19) {
+            if (studentAge >= 1 && studentAge <= 20) {
                 return studentAge;
             }
 
