@@ -43,9 +43,28 @@ public class Main {
                         System.out.print("Enter the name of the Student: ");
                         name = scanner.nextLine();
 
-                        age = InputValidator.getValidStudentAge(scanner);
+                        while (true) {
+                            age = InputValidator.getValidStudentAge(scanner);
+                            std = InputValidator.getValidStudentClass(scanner);
 
-                        std = InputValidator.getValidStudentClass(scanner);
+                            if (StudentRules.isAgeClassValid(age, std)) {
+                                break;
+                            }
+
+                            else {
+                                int stdNew = std + 5;
+                                System.out.printf("The Age and Class combination don't really add up. (Expected Age %d-%d-%d for Class %d)\n", stdNew - 1, stdNew, stdNew + 1, std);
+                                System.out.print("Treat this as an exception? (Y / N): ");
+                                boolean exceptionAgeClass = InputValidator.getValidYOrN(scanner);
+
+                                if(exceptionAgeClass) {
+                                    break;
+                                }
+
+                                System.out.println("Try entering details again.");
+
+                            }
+                        }
 
                         Student student = new Student(iD, name, age, std);
                         studentManager.addStudent(student);

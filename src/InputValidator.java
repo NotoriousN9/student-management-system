@@ -66,4 +66,20 @@ public class InputValidator {
             }
         }
     }
+
+    public static boolean getValidYOrN(Scanner scanner) {
+        while (true) {
+            String choice = scanner.nextLine();
+
+            if(choice.equalsIgnoreCase("Y")) {
+                return true;
+            }
+
+            if (choice.equalsIgnoreCase("N")) {
+                return false;
+            }
+
+            System.out.print("Please enter Y or N: ");
+        }
+    }
 }
