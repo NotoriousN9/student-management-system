@@ -46,4 +46,24 @@ public class InputValidator {
             System.out.println("Enter a valid Class of the Student.\n");
         }
     }
+
+    public static int getValidChoice (Scanner scanner, int min, int max) {
+        while (true) {
+            System.out.println("Enter your choice: ");
+
+            if (scanner.hasNextInt()) {
+                int choice = scanner.nextInt();
+                scanner.nextLine();
+
+                if(choice >= min && choice <= max) {
+                    return choice;
+                }
+                else {
+                    scanner.nextLine();
+                }
+
+                System.out.println("Enter a valid choice.");
+            }
+        }
+    }
 }

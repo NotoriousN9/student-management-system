@@ -26,9 +26,8 @@ public class Main {
                 """);
 
         while(choice != 6) {
-            System.out.print("Enter your choice: ");
-            choice = scanner.nextInt();
-            if(choice > 0 && choice <= 6) {
+            choice = InputValidator.getValidChoice(scanner, 1, 6);
+
                 switch(choice) {
                     case 1:
                         while (true) {
@@ -87,8 +86,7 @@ public class Main {
                                 System.out.println("3. Change Student Class.");
                                 System.out.println("4. Exit.");
                                 System.out.print("What to change?: ");
-                                change = scanner.nextInt();
-                                scanner.nextLine();
+                                change = InputValidator.getValidChoice(scanner, 1, 4);
 
                                 switch (change) {
                                     case 1:
@@ -181,12 +179,6 @@ public class Main {
 
                         break;
                 }
-            }
-            else {
-                System.out.println();
-                System.out.println("Enter valid Choice.");
-            }
         }
-
     }
 }
