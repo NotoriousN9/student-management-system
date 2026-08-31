@@ -1,4 +1,3 @@
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -9,7 +8,7 @@ public class Main {
     ) {
         int studentId = InputValidator.getValidStudentId(scanner);
 
-        Student student = studentManager.searchStudent(studentId);
+        Student student = studentManager.findStudent(studentId);
 
         if (student == null) {
             System.out.println("\nStudent not found!\n");
@@ -20,11 +19,11 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int choice = 0;
+        int choice;
 
         StudentManager studentManager = new StudentManager();
 
-        while (choice != 6) {
+        do {
             System.out.println();
             System.out.println("""
                     ============================================
@@ -110,12 +109,7 @@ public class Main {
                         int change = 0;
 
                         while (change != 4) {
-                            System.out.println();
-                            System.out.println("CHANGE ATTRIBUTES");
-                            System.out.println("1. Change Student Name.");
-                            System.out.println("2. Change Student Age.");
-                            System.out.println("3. Change Student Class.");
-                            System.out.println("4. Exit.");
+                            StudentView.displayUpdateMenu();
 
                             change =
                                     InputValidator.getValidChoice(
@@ -270,7 +264,13 @@ public class Main {
                 case 5:
                     StudentView.displayStudents(studentManager.getStudents());
                     break;
+
+                case 6:
+                    System.out.println();
+                    System.out.println("Exiting Student Management System...");
+                    System.out.println("Goodbye!");
+                    break;
             }
-        }
+        }while (choice != 6);
     }
 }

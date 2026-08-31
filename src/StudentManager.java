@@ -1,40 +1,32 @@
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class StudentManager {
-    private final List<Student> students = new ArrayList<>();
+    private final Map<Integer, Student> students = new LinkedHashMap<>();
 
     public boolean addStudent(Student student) {
-        if(searchStudent(student.getStudentId()) != null) {
+        if(studentIdExists(student.getStudentId())) {
             return false;
         }
 
-        students.add(student);
+        students.put(student.getStudentId(), student);
         return true;
     }
 
     public boolean studentIdExists(int studentId) {
-        return searchStudent(studentId) != null;
+        return students.containsKey(studentId);
     }
 
     public List<Student> getStudents() {
-        return List.copyOf(students);
+        return List.copyOf(students.values());
     }
 
-    public Student searchStudent(int studentId) {
-        for (Student student : students) {
-            if (student.getStudentId() == studentId) {
-                return student;
-            }
-        }
-
-        return null;
+    public Student findStudent(int studentId) {
+        return students.get(studentId);
     }
 
     public boolean removeStudent(int studentId) {
-        return students.removeIf(
-                student -> student.getStudentId() == studentId
-        );
+        return students.remove(studentId) != null;
     }
 }
