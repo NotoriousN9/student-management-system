@@ -33,17 +33,8 @@ public class StudentManager {
     }
 
     public boolean removeStudent(int studentId) {
-        Iterator<Student> iterator = students.iterator();
-
-        while(iterator.hasNext()) {
-            Student student = iterator.next();
-
-            if(student.getStudentId() == studentId) {
-                iterator.remove();
-                return true;
-            }
-        }
-
-        return false;
+        return students.removeIf(
+                student -> student.getStudentId() == studentId
+        );
     }
 }

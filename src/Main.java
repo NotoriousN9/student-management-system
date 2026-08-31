@@ -67,29 +67,7 @@ public class Main {
                         age = InputValidator.getValidStudentAge(scanner);
                         std = InputValidator.getValidStudentClass(scanner);
 
-                        if (StudentRules.isAgeClassValid(age, std)) {
-                            break;
-                        }
-
-                        int expectedAge = std + 5;
-
-                        System.out.printf(
-                                "The Age and Class combination don't really add up. " +
-                                        "Expected Age %d-%d-%d for Class %d\n",
-                                expectedAge - 1,
-                                expectedAge,
-                                expectedAge + 1,
-                                std
-                        );
-
-                        System.out.print(
-                                "Treat this as an exception? (Y / N): "
-                        );
-
-                        boolean exceptionAgeClass =
-                                InputValidator.getValidYOrN(scanner);
-
-                        if (exceptionAgeClass) {
+                        if (StudentInputHelper.validateAgeAndClass(scanner, age, std)) {
                             break;
                         }
 
@@ -190,7 +168,8 @@ public class Main {
                                         break;
                                     }
 
-                                    if (StudentRules.isAgeClassValid(
+                                    if (StudentInputHelper.validateAgeAndClass(
+                                            scanner,
                                             newAge,
                                             findStudent.getStd()
                                     )) {
@@ -198,47 +177,14 @@ public class Main {
                                         findStudent.setStudentAge(newAge);
 
                                         System.out.println(
-                                                "New Age set successfully.\n"
+                                                "Student age updated successfully."
                                         );
 
                                     } else {
 
-                                        int expectedAge =
-                                                findStudent.getStd() + 5;
-
-                                        System.out.printf(
-                                                "The Age and Class combination don't really add up. " +
-                                                        "Expected Age %d-%d-%d for Class %d\n",
-                                                expectedAge - 1,
-                                                expectedAge,
-                                                expectedAge + 1,
-                                                findStudent.getStd()
+                                        System.out.println(
+                                                "Age was not changed."
                                         );
-
-                                        System.out.print(
-                                                "Treat this as an exception? (Y / N): "
-                                        );
-
-                                        boolean exceptionAgeClass =
-                                                InputValidator.getValidYOrN(
-                                                        scanner
-                                                );
-
-                                        if (exceptionAgeClass) {
-
-                                            findStudent.setStudentAge(newAge);
-
-                                            System.out.println();
-                                            System.out.println(
-                                                    "Student age updated successfully as an exception."
-                                            );
-
-                                        } else {
-
-                                            System.out.println(
-                                                    "Age was not changed."
-                                            );
-                                        }
                                     }
 
                                     break;
@@ -261,59 +207,16 @@ public class Main {
                                         break;
                                     }
 
-                                    if (StudentRules.isAgeClassValid(
-                                            findStudent.getStudentAge(),
-                                            newStd
-                                    )) {
-
+                                    if(StudentInputHelper.validateAgeAndClass(scanner, findStudent.getStudentAge(), newStd)) {
                                         findStudent.setStd(newStd);
 
-                                        System.out.println(
-                                                "Student Class updated successfully."
-                                        );
-
-                                    } else {
-
-                                        int expectedAge =
-                                                newStd + 5;
-
-                                        System.out.printf(
-                                                "The Age and Class combination don't really add up. " +
-                                                        "Expected Age %d-%d-%d for Class %d\n",
-                                                expectedAge - 1,
-                                                expectedAge,
-                                                expectedAge + 1,
-                                                newStd
-                                        );
-
-                                        System.out.print(
-                                                "Treat this as an exception? (Y / N): "
-                                        );
-
-                                        boolean exceptionAgeClass =
-                                                InputValidator.getValidYOrN(
-                                                        scanner
-                                                );
-
-                                        if (exceptionAgeClass) {
-
-                                            findStudent.setStd(newStd);
-
-                                            System.out.println();
-                                            System.out.println(
-                                                    "Student Class updated successfully as an exception."
-                                            );
-
-                                        } else {
-
-                                            System.out.println(
-                                                    "Class was not changed."
-                                            );
-                                        }
+                                        System.out.println("Student Class changed successfully.");
+                                    }
+                                    else {
+                                        System.out.println("Class was not changed.");
                                     }
 
                                     break;
-
 
                                 case 4:
                                     break;
@@ -365,13 +268,7 @@ public class Main {
 
 
                 case 5:
-                    List<Student> students =
-                            studentManager.getStudents();
-
-                    for (Student studentView : students) {
-                        StudentView.displayStudent(studentView);
-                    }
-
+                    StudentView.displayStudents(studentManager.getStudents());
                     break;
             }
         }

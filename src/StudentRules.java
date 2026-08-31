@@ -4,4 +4,8 @@ public class StudentRules {
 
         return age >= expectedAge - 1 && age <= expectedAge + 1;
     }
+
+    public static int getExpectedAge(int std) {
+        return std + 5;
+    }
 }
