@@ -7,6 +7,10 @@ public class StudentRules {
         return age >= expectedAge - 1 && age <= expectedAge + 1;
     }
 
+    public static boolean isValidStudentName(String studentName) {
+        return studentName != null && !studentName.isBlank() && studentName.matches("[a-zA-Z ]+");
+    }
+
     public static int getExpectedAge(int std) {
         return std + 5;
     }

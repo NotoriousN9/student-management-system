@@ -167,7 +167,6 @@ public class Main {
                                             newAge,
                                             findStudent.getStd()
                                     )) {
-
                                         findStudent.setStudentAge(newAge);
 
                                         System.out.println(
@@ -175,7 +174,6 @@ public class Main {
                                         );
 
                                     } else {
-
                                         System.out.println(
                                                 "Age was not changed."
                                         );

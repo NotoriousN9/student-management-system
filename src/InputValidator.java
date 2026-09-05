@@ -7,7 +7,7 @@ public class InputValidator {
             System.out.print("Enter the name of the Student: ");
             String studentName = scanner.nextLine().trim();
 
-            if(!studentName.isEmpty() && studentName.matches("[a-zA-Z ]+")) {
+            if(StudentRules.isValidStudentName(studentName)) {
                 return studentName;
             }
 
@@ -16,14 +16,21 @@ public class InputValidator {
     }
 
     public static int getValidStudentId(Scanner scanner) {
-        while (true) {
+        while(true) {
             System.out.println();
             System.out.print("Enter the Student ID(4 DIGIT): ");
-            int studentId = scanner.nextInt();
-            scanner.nextLine();
 
-            if (StudentRules.isValidStudentId(studentId)) {
-                return studentId;
+            if(scanner.hasNextInt()) {
+                int studentId = scanner.nextInt();
+                scanner.nextLine();
+
+                if (StudentRules.isValidStudentId(studentId)) {
+                    return studentId;
+                }
+
+            }
+            else{
+                scanner.nextLine();
             }
 
             System.out.println("Enter a valid ID.\n");
@@ -34,11 +41,17 @@ public class InputValidator {
         while(true) {
             System.out.println();
             System.out.print("Enter the Student's age: ");
-            int studentAge = scanner.nextInt();
-            scanner.nextLine();
 
-            if (StudentRules.isValidStudentAge(studentAge)) {
-                return studentAge;
+            if(scanner.hasNextInt()) {
+                int studentAge = scanner.nextInt();
+                scanner.nextLine();
+
+                if (StudentRules.isValidStudentAge(studentAge)) {
+                    return studentAge;
+                }
+            }
+            else{
+                scanner.nextLine();
             }
 
             System.out.println("Enter a valid age.\n");
@@ -49,11 +62,17 @@ public class InputValidator {
         while(true) {
             System.out.println();
             System.out.print("Enter the class of the Student: ");
-            int studentStd = scanner.nextInt();
-            scanner.nextLine();
 
-            if(StudentRules.isValidStudentClass(studentStd)) {
-                return studentStd;
+            if(scanner.hasNextInt()) {
+                int studentStd = scanner.nextInt();
+                scanner.nextLine();
+
+                if(StudentRules.isValidStudentClass(studentStd)) {
+                    return studentStd;
+                }
+            }
+            else{
+                scanner.nextLine();
             }
 
             System.out.println("Enter a valid Class of the Student.\n");
