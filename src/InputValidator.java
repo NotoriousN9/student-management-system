@@ -17,7 +17,6 @@ public class InputValidator {
 
     public static int getValidStudentId(Scanner scanner) {
         while(true) {
-            System.out.println();
             System.out.print("Enter the Student ID(4 DIGIT): ");
 
             if(scanner.hasNextInt()) {
@@ -39,7 +38,6 @@ public class InputValidator {
 
     public static int getValidStudentAge(Scanner scanner) {
         while(true) {
-            System.out.println();
             System.out.print("Enter the Student's age: ");
 
             if(scanner.hasNextInt()) {
@@ -60,7 +58,6 @@ public class InputValidator {
 
     public static int getValidStudentClass (Scanner scanner) {
         while(true) {
-            System.out.println();
             System.out.print("Enter the class of the Student: ");
 
             if(scanner.hasNextInt()) {

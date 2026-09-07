@@ -61,10 +61,11 @@ src
 ├── StudentRules.java
 ├── StudentInputHelper.java
 ├── StudentView.java
+├── StudentOperations.java
 └── InputValidator.java
 ```
 
-### Class Responsibilities
+## Class Responsibilities
 
 #### `Main.java`
 
@@ -124,6 +125,22 @@ Responsible for:
 - Displaying individual student information
 - Displaying multiple students
 - Displaying update menus
+
+#### `StudentOperations.java`
+
+Handles the main student-related workflows of the application.
+
+Responsible for:
+- Adding students
+- Searching for students
+- Updating student information
+- Removing students
+- Coordinating input validation and student operations
+- Handling update-specific workflows such as changing name, age, and class
+- Connecting InputValidator, StudentManager, StudentInputHelper, and StudentView where needed
+
+---
+
 
 #### `InputValidator.java`
 
@@ -239,4 +256,4 @@ The goal is to gradually increase the project's complexity while applying the Ja
 
 ## Author
 
-Built by **Notorious** as part of a Java learning and portfolio journey.
+Built by `Notorious` as part of a Java learning and portfolio journey.
