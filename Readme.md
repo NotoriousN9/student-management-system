@@ -39,6 +39,7 @@ This project is being built as part of my Java learning and portfolio journey, w
 - [ ] Student Statistics
 - [ ] Export Student Records
 - [ ] Unit Testing
+- [ ] Auto ID Assigner
 
 ---
 
