@@ -1,8 +1,8 @@
-public class Subjects {
+public class Subject {
     private final int subjectCode;
     private String subjectName;
 
-    public Subjects(int subjectCode, String subjectName) {
+    public Subject(int subjectCode, String subjectName) {
         this.subjectCode = subjectCode;
         this.subjectName = subjectName;
     }
