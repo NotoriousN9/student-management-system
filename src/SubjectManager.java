@@ -1,4 +1,5 @@
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SubjectManager {
@@ -18,5 +19,13 @@ public class SubjectManager {
 
     public Subject findSubject(int subjectCode) {
         return subjects.get(subjectCode);
+    }
+
+    public List<Subject> getSubjects() {
+        return List.copyOf(subjects.values());
+    }
+
+    public boolean removeSubject(int subjectCode) {
+        return subjects.remove(subjectCode) != null;
     }
 }
