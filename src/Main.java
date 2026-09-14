@@ -4,8 +4,28 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int choice;
+
         StudentManager studentManager = new StudentManager();
-        StudentOperations studentOperations = new StudentOperations(scanner, studentManager);
+        ClassSubjectManager classSubjectManager = new ClassSubjectManager();
+        StudentOperations studentOperations = new StudentOperations(scanner, studentManager, classSubjectManager);
+
+        //Temporary
+        Subject maths = new Subject(101, "Mathematics");
+        Subject english = new Subject(102, "English");
+        Subject physics = new Subject(103, "Physics");
+        Subject socialScience = new Subject(104, "Social Science");
+        Subject history = new Subject(105, "History");
+        Subject bengali = new Subject(106, "Bengali");
+
+        classSubjectManager.addSubjectToClass(10, maths);
+        classSubjectManager.addSubjectToClass(10, english);
+        classSubjectManager.addSubjectToClass(10, physics);
+        classSubjectManager.addSubjectToClass(10, socialScience);
+        classSubjectManager.addSubjectToClass(10, history);
+        classSubjectManager.addSubjectToClass(10, bengali);
+
+        SubjectManager subjectManager = new SubjectManager();
+        classSubjectManager = new ClassSubjectManager();
 
         do {
             System.out.println();
@@ -55,6 +75,6 @@ public class Main {
                     System.out.println("Goodbye!");
                     break;
             }
-        }while (choice != 6);
+        } while (choice != 6);
     }
 }

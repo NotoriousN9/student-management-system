@@ -30,10 +30,11 @@ This project is being built as part of my Java learning and portfolio journey, w
 - [x] Subject Catalogue Management
 - [x] Subject Code Lookup
 - [x] Subject Addition and Removal
+- [x] Class-Based Subject Assignment
+- [x] Automatic Subject Assignment to Students
 
 ### 🚀 Planned
 
-- [ ] Class-Based Subject Assignment
 - [ ] Stream-Based Subject Assignment
 - [ ] Compulsory and Optional Subjects
 - [ ] Admin Subject Management
@@ -72,7 +73,8 @@ src
 ├── StudentOperations.java
 ├── InputValidator.java
 ├── Subject.java
-└── SubjectManager.java
+├── SubjectManager.java
+└── ClassSubjectManager.java
 ```
 
 ---
@@ -96,7 +98,9 @@ Represents an individual student.
 Responsible for:
 
 - Storing student information
+- Storing the subjects assigned to the student
 - Providing getters and setters
+- Adding subjects to the student
 - Protecting the object's basic state through validation
 
 ### `StudentManager.java`
@@ -156,7 +160,8 @@ Responsible for:
 - Removing students
 - Coordinating input validation and student operations
 - Handling update-specific workflows such as changing name, age, and class
-- Connecting `InputValidator`, `StudentManager`, `StudentInputHelper`, and `StudentView` where needed
+- Automatically assigning subjects based on the student's class
+- Connecting `InputValidator`, `StudentManager`, `StudentInputHelper`, `ClassSubjectManager`, and `StudentView` where needed
 
 ### `InputValidator.java`
 
@@ -197,6 +202,21 @@ Responsible for:
 
 Subject records are currently stored using a `LinkedHashMap<Integer, Subject>`.
 
+### `ClassSubjectManager.java`
+
+Manages the relationship between classes and their assigned subjects.
+
+Responsible for:
+
+- Assigning subjects to classes
+- Removing subjects from classes
+- Retrieving subjects for a specific class
+- Retrieving the complete class-subject structure
+- Preventing duplicate subjects within a class
+- Limiting each class to a maximum of 6 subjects
+
+Class-to-subject relationships are stored using a `LinkedHashMap<Integer, List<Subject>>`.
+
 ---
 
 ## Learning Objectives
@@ -214,6 +234,7 @@ This project focuses on learning and applying:
 - Java Collections
 - `Map`
 - `LinkedHashMap`
+- `List`
 - Searching
 - Exception Handling
 - Clean Code Practices
@@ -256,6 +277,12 @@ An age within ±1 year of the expected age is considered normally valid.
 
 If the combination falls outside that range, the user is given the option to explicitly treat it as an exception.
 
+### Class Subjects
+
+- A class can have a maximum of 6 subjects
+- A subject cannot be assigned to the same class more than once
+- Students automatically receive the subjects assigned to their class when they are added
+
 ---
 
 ## Data Structure
@@ -294,13 +321,32 @@ This allows:
 - Fast subject removal
 - Preservation of insertion order when displaying subjects
 
+### Class Subject Structure
+
+Class-to-subject relationships are stored using:
+
+```text
+LinkedHashMap<Integer, List<Subject>>
+```
+
+The class number is used as the key, while the value contains the subjects assigned to that class.
+
+For example:
+
+```text
+Class 10 → [Mathematics, English, Physics, History, Bengali, Hindi]
+```
+
+This structure allows the application to maintain a predefined subject structure for each class.
+
+When a new student is added, the student's class is used to retrieve the appropriate subjects automatically.
+
 ---
 
 ## Future Improvements
 
 The project will gradually be expanded with features such as:
 
-- Class-based subject assignment
 - Stream-based subject assignment
 - Compulsory and optional subjects
 - Admin-controlled subject management
@@ -339,7 +385,8 @@ Subject Management
     └── Subject Removal              ✅
 
 Academic Structure
-    ├── Class-Based Subjects         🚧
+    ├── Class-Based Subjects         ✅
+    ├── Automatic Student Assignment ✅
     ├── Stream-Based Subjects        🚧
     ├── Compulsory Subjects          🚧
     └── Optional / Extra Subjects    🚧

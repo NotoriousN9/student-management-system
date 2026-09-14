@@ -1,8 +1,12 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Student {
     private final int studentId;
     private String studentName;
     private int studentAge;
     private int std;
+    private List<Subject> subjects;
 
     public Student(int studentId, String studentName, int studentAge, int std) {
         if(!StudentRules.isValidStudentName(studentName)) {
@@ -25,6 +29,15 @@ public class Student {
         this.studentAge = studentAge;
         this.studentName = studentName;
         this.std = std;
+        this.subjects = new ArrayList<>();
+    }
+
+    public List<Subject> getSubjects() {
+        return List.copyOf(subjects);
+    }
+
+    public void addSubject(Subject subject) {
+        subjects.add(subject);
     }
 
     public int getStudentId() {

@@ -1,8 +1,10 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class StudentOperations {
     private final Scanner scanner;
     private final StudentManager studentManager;
+    private final ClassSubjectManager classSubjectManager;
 
     private Student getStudentById() {
         int studentId = InputValidator.getValidStudentId(scanner);
@@ -16,9 +18,10 @@ public class StudentOperations {
         return student;
     }
 
-    public StudentOperations(Scanner scanner, StudentManager studentManager) {
+    public StudentOperations(Scanner scanner, StudentManager studentManager, ClassSubjectManager classSubjectManager) {
         this.scanner = scanner;
         this.studentManager = studentManager;
+        this.classSubjectManager = classSubjectManager;
     }
 
     public void addStudent(){
@@ -60,10 +63,21 @@ public class StudentOperations {
                 std
         );
 
+        List<Subject> classSubjects = classSubjectManager.getSubjectsForClass(student.getStd());
+
+        for(Subject subject : classSubjects) {
+            student.addSubject(subject);
+        }
+
         if (studentManager.addStudent(student)) {
             System.out.println("Student added successfully.");
+
+            for (Subject subject : student.getSubjects()) {
+                System.out.println(subject.getSubjectName());
+            }
         }
     }
+
 
     public void searchStudent(){
         Student searchStudent =
